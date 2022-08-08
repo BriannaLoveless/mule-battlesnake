@@ -18,17 +18,10 @@ fun snakePartHere(x,y) = snakes some (snake) -> (snake.body some (segment) -> (s
 
 fun locationAvailable(x, y) = (not snakePartHere(x,y)) and (not wallHere(x,y))
 
-var xdist = food map (disc) -> head.x - disc.x
-var xAbsDist = xdist map (value) -> abs(value)
-var xMin = min(xAbsDist) default 0
-var xFindIndex = indexOf(xAbsDist, xMin)
-var closestHorizontal = xdist[xFindIndex]
-
-var ydist = food map (disc) -> head.y - disc.y
-var yAbsDist = ydist map (value) -> abs(value)
-var yMin = min(yAbsDist) default 0
-var yFindIndex = indexOf(yAbsDist, yMin)
-var closestVertical = ydist[yFindIndex]
+var foodAbsDistance = food map (piece) -> abs(head.x - piece.x) + abs(head.y - piece.y)
+var minFoodDistance = min(foodAbsDistance) default 0
+var foodFindIndex = indexOf(foodAbsDistance, minFoodDistance)
+var closestFood = food[foodFindIndex]
 
 var checkedPositions = {
 	"left": locationAvailable(head.x - 1, head.y),
@@ -38,22 +31,10 @@ var checkedPositions = {
 }
 
 var preferredMoves = {
-	"left": if(typeOf(closestHorizontal) == Number)
-            	isNumeric(closestHorizontal as String) and closestHorizontal != 0
-        	else
-            	false,
-	"right": if(typeOf(closestHorizontal) == Number)
-                (not isNumeric(closestHorizontal as String)) and closestHorizontal != 0
-            else
-                false,
-	"up": if(typeOf(closestVertical) == Number)
-                (not isNumeric(closestVertical as String)) and closestVertical != 0
-          else
-               false,
-	"down": if(typeOf(closestVertical) == Number)
-                isNumeric(closestVertical as String) and closestVertical != 0
-            else
-                false
+	"left": (head.x - closestFood.x > 0),
+	"right": (head.x - closestFood.x < 0),
+	"up": (head.y - closestFood.y < 0),
+	"down": (head.y - closestFood.y > 0)
 }
 
 fun calcLastMove(pt1,pt2) =
@@ -82,7 +63,6 @@ var nextMove =
 
 ---
 {
-	move: nextMove,
-	shout: "Moving $(nextMove)"
+ 	move: nextMove,
+ 	shout: "Moving $(nextMove)"
 }
-// checkedPositions
