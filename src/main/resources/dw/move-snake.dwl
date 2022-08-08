@@ -30,12 +30,21 @@ var checkedPositions = {
 	"down": locationAvailable(head.x, head.y - 1)
 }
 
-var preferredMoves = {
-	"left": (head.x - closestFood.x > 0),
-	"right": (head.x - closestFood.x < 0),
-	"up": (head.y - closestFood.y < 0),
-	"down": (head.y - closestFood.y > 0)
-}
+var preferredMoves = 
+	if (isEmpty(closestFood))
+        {
+            "left": false,
+            "right": false,
+            "up": false,
+            "down": false
+        }
+    else
+        {
+            "left": (head.x - closestFood.x > 0),
+            "right": (head.x - closestFood.x < 0),
+            "up": (head.y - closestFood.y < 0),
+            "down": (head.y - closestFood.y > 0)
+        }
 
 fun calcLastMove(pt1,pt2) =
 	if(pt1.x > pt2.x)
