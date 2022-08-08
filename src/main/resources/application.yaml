@@ -1,0 +1,8 @@
+battlesnake:
+  config:
+    "apiversion": "1"
+    "author": "bloveless"
+    "color" : "#fabd73"
+    "head" : "caffeine"
+    "tail" : "mystic-moon"
+    "version" : "0.0.1-beta"

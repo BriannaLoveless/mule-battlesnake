@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<munit:config name="basic-test-suite.xml" />
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="8b71597e-ca8e-4727-abea-b00c68d59255" expression="#[payload.author]" is='#[MunitTools::equalTo("bloveless")]' message="">
+		<http:request-connection host="localhost" port="8081" />
+	</http:request-config>
+	<munit:test name="postMoveRespondsWithValidMove" doc:id="503a7928-c206-419e-b656-3005affff9be" >
+		<munit:enable-flow-sources >
+			<munit:enable-flow-source value="battlesnake-api-main" />
+			<munit:enable-flow-source value="post:\move:application\json:battlesnake-api-config" />
+		</munit:enable-flow-sources>
+		<munit:execution >
+			<ee:transform doc:name="battlesnake doc example" doc:id="7f2a30e1-9160-41e4-9001-b9da8babcfce" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+  game: {
+    id: "game-00fe20da-94ad-11ea-bb37",
+    ruleset: {
+      name: "standard",
+      version: "v.1.2.3",
+      settings: {
+        foodSpawnChance: 25,
+        minimumFood: 1,
+        hazardDamagePerTurn: 14,
+        royale: {
+          shrinkEveryNTurns: 5
+        },
+        squad: {
+          allowBodyCollisions: true,
+          sharedElimination: true,
+          sharedHealth: true,
+          sharedLength: true
+        }
+      }
+    },
+    map: "standard",
+    source: "league",
+    timeout: 500
+  },
+  turn: 14,
+  board: {
+    height: 11,
+    width: 11,
+    food: [
+      {
+        x: 5,
+        y: 5
+      }, 
+      {
+        x: 9,
+        y: 0
+      }, 
+      {
+        x: 2,
+        y: 6
+      }
+    ],
+    hazards: [
+      {
+        x: 3,
+        y: 2
+      }
+    ],
+    snakes: [
+      {
+        id: "snake-508e96ac-94ad-11ea-bb37",
+        name: "My Snake",
+        health: 54,
+        body: [
+          {
+            x: 0,
+            y: 0
+          }, 
+          {
+            x: 1,
+            y: 0
+          }, 
+          {
+            x: 2,
+            y: 0
+          }
+        ],
+        latency: "111",
+        head: {
+          x: 0,
+          y: 0
+        },
+        length: 3,
+        shout: "why are we shouting??",
+        squad: "",
+        customizations: {
+          color: "#FF0000",
+          head: "pixel",
+          tail: "pixel"
+        }
+      }, 
+      {
+        id: "snake-b67f4906-94ae-11ea-bb37",
+        name: "Another Snake",
+        health: 16,
+        body: [
+          {
+            x: 5,
+            y: 4
+          }, 
+          {
+            x: 5,
+            y: 3
+          }, 
+          {
+            x: 6,
+            y: 3
+          }, 
+          {
+            x: 6,
+            y: 2
+          }
+        ],
+        latency: "222",
+        head: {
+          x: 5,
+          y: 4
+        },
+        length: 4,
+        shout: "I'm not really sure...",
+        squad: "",
+        customizations: {
+          color: "#26CF04",
+          head: "silly",
+          tail: "curled"
+        }
+      }
+    ]
+  },
+  you: {
+    id: "snake-508e96ac-94ad-11ea-bb37",
+    name: "My Snake",
+    health: 54,
+    body: [
+      {
+        x: 0,
+        y: 0
+      }, 
+      {
+        x: 1,
+        y: 0
+      }, 
+      {
+        x: 2,
+        y: 0
+      }
+    ],
+    latency: "111",
+    head: {
+      x: 0,
+      y: 0
+    },
+    length: 3,
+    shout: "why are we shouting??",
+    squad: "",
+    customizations: {
+      color: "#FF0000",
+      head: "pixel",
+      tail: "pixel"
+    }
+  }
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<http:request method="POST" doc:name="POST /api/move" doc:id="cafd5aeb-aada-417b-8606-8baaf20f0672" config-ref="HTTP_Request_configuration" path="/api/move"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that status is 200" doc:id="a8799c72-f667-4334-bf80-f652294ce0a8" expression="#[attributes.statusCode]" is="#[MunitTools::equalTo(200)]"/>
+			<munit-tools:assert-that doc:name="Assert that move is valid" doc:id="99f34b7c-255e-41cd-84b3-1d1837a3691b" is='#[MunitTools::anyOf([&#10;	MunitTools::equalTo("up"),&#10;	MunitTools::equalTo("down"),&#10;	MunitTools::equalTo("left"),&#10;	MunitTools::equalTo("right")&#10;])]' expression="#[payload.move]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getRespondsWithCorrectAuthor" doc:id="73f56879-297b-49d4-88d5-eae06fa4bab8" >
+		<munit:enable-flow-sources >
+			<munit:enable-flow-source value="battlesnake-api-main" />
+			<munit:enable-flow-source value="get:\:battlesnake-api-config" />
+		</munit:enable-flow-sources>
+		<munit:execution >
+			<http:request method="GET" doc:name="GET " doc:id="6c1e826a-af9c-41cf-b8d8-a1a623c913fb" config-ref="HTTP_Request_configuration" path="/api"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that author is bloveless" doc:id="ac514b4c-b0be-4880-9cbc-9261ebc4dab1" expression="#[payload.author]" is='#[MunitTools::equalTo("bloveless")]'/>
+		</munit:validation>
+	</munit:test>
+
+</mule>
