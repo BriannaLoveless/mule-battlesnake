@@ -2897,7 +2897,7 @@ output application/json
 			<munit-tools:assert-that doc:name='Assert that move is "down"' doc:id="1f091da4-c0fb-4d39-9e9f-63f172aae2db" expression="#[payload.move]" is='#[MunitTools::equalTo("down")]' />
 		</munit:validation>
 	</munit:test>
-	<munit:test name="postMoveSnakeGoesSameDirectionIfSafeAndNoFoodUp" doc:id="defe02d2-7885-42fc-8ff6-ae129a48b448">
+	<munit:test name="postMoveSnakeGoesSameDirectionIfSafeAndNoFoodExistsUp" doc:id="defe02d2-7885-42fc-8ff6-ae129a48b448">
 		<munit:enable-flow-sources >
 			<munit:enable-flow-source value="battlesnake-api-main" />
 			<munit:enable-flow-source value="post:\move:application\json:battlesnake-api-config" />
@@ -3007,7 +3007,7 @@ output application/json
 			<munit-tools:assert-that doc:name='Assert that move is "up"' doc:id="12e2dc47-1c86-4431-b3a2-595e01b948f0" expression="#[payload.move]" is='#[MunitTools::equalTo("up")]' />
 		</munit:validation>
 	</munit:test>
-	<munit:test name="postMoveSnakeGoesSameDirectionIfSafeAndNoFoodDown" doc:id="74daf1fb-1eaa-4978-8513-4c8683a59919" >
+	<munit:test name="postMoveSnakeGoesSameDirectionIfSafeAndNoFoodExistsDown" doc:id="74daf1fb-1eaa-4978-8513-4c8683a59919" >
 		<munit:enable-flow-sources >
 			<munit:enable-flow-source value="battlesnake-api-main" />
 			<munit:enable-flow-source value="post:\move:application\json:battlesnake-api-config" />
@@ -3117,21 +3117,21 @@ output application/json
 			<munit-tools:assert-that doc:name='Assert that move is "down"' doc:id="fc8a7291-6c73-4e79-8463-42ddbb118c03" expression="#[payload.move]" is='#[MunitTools::equalTo("down")]' />
 		</munit:validation>
 	</munit:test>
-	<munit:test name="postMoveSnakeGoesSameDirectionIfSafeAndNoFoodLeft" doc:id="ac4903af-3c01-4f40-abdf-b14c9f74b7fc" >
+	<munit:test name="postMoveSnakeGoesSameDirectionIfSafeAndNoFoodExistsLeft" doc:id="ac4903af-3c01-4f40-abdf-b14c9f74b7fc" >
 		<munit:enable-flow-sources >
 			
 			<munit:enable-flow-source value="post:\move:application\json:battlesnake-api-config" />
 			<munit:enable-flow-source value="battlesnake-api-main" />
 		</munit:enable-flow-sources>
 	</munit:test>
-	<munit:test name="postMoveSnakeGoesSameDirectionIfSafeAndNoFoodRight" doc:id="58f686b2-f06c-4a06-8341-0f1df0582278" >
+	<munit:test name="postMoveSnakeGoesSameDirectionIfSafeAndNoFoodExistsRight" doc:id="58f686b2-f06c-4a06-8341-0f1df0582278" >
 		<munit:enable-flow-sources >
 			
 			<munit:enable-flow-source value="post:\move:application\json:battlesnake-api-config" />
 			<munit:enable-flow-source value="battlesnake-api-main" />
 		</munit:enable-flow-sources>
 	</munit:test>
-	<munit:test name="postMoveIgnoreFarAwayFoodWhenMoreThan2FoodUp" doc:id="a2417e94-6203-4a85-a264-b6826e4fd6b6" >
+	<munit:test name="postMoveIgnoreFarAwayFoodWhenMoreThan2FoodExistsUp" doc:id="a2417e94-6203-4a85-a264-b6826e4fd6b6" >
 		<munit:enable-flow-sources >
 			<munit:enable-flow-source value="battlesnake-api-main" />
 			<munit:enable-flow-source value="post:\move:application\json:battlesnake-api-config" />
@@ -3254,21 +3254,161 @@ output application/json
 			<munit-tools:assert-that doc:name='Assert that move is "up"' doc:id="128b4411-1751-4832-9c54-969dd4ca6a45" expression="#[payload.move]" is='#[MunitTools::equalTo("up")]' />
 		</munit:validation>
 	</munit:test>
-	<munit:test name="postMoveIgnoreFarAwayFoodWhenMoreThan2FoodDown" doc:id="4b0d7385-6c21-4968-84cb-50e97fdfe119" >
+	<munit:test name="postMoveIgnoreFarAwayFoodWhenMoreThan2FoodExistsDown" doc:id="4b0d7385-6c21-4968-84cb-50e97fdfe119" >
 		<munit:enable-flow-sources >
 			
 			<munit:enable-flow-source value="post:\move:application\json:battlesnake-api-config" />
 			<munit:enable-flow-source value="battlesnake-api-main" />
 		</munit:enable-flow-sources>
 	</munit:test>
-	<munit:test name="postMoveIgnoreFarAwayFoodWhenMoreThan2FoodLeft" doc:id="5632af3a-7e72-4eb3-b7c3-a36c4bc7490e" >
+	<munit:test name="postMoveIgnoreFarAwayFoodWhenMoreThan2FoodExistsLeft" doc:id="5632af3a-7e72-4eb3-b7c3-a36c4bc7490e" >
 		<munit:enable-flow-sources >
 			
 			<munit:enable-flow-source value="post:\move:application\json:battlesnake-api-config" />
 			<munit:enable-flow-source value="battlesnake-api-main" />
 		</munit:enable-flow-sources>
 	</munit:test>
-	<munit:test name="postMoveIgnoreFarAwayFoodWhenMoreThan2FoodRight" doc:id="38c66fa8-08e6-4d9d-aabb-6623915411c2" >
+	<munit:test name="postMoveIgnoreFarAwayFoodWhenMoreThan2FoodExistsRight" doc:id="38c66fa8-08e6-4d9d-aabb-6623915411c2" >
+		<munit:enable-flow-sources >
+			
+			<munit:enable-flow-source value="post:\move:application\json:battlesnake-api-config" />
+			<munit:enable-flow-source value="battlesnake-api-main" />
+		</munit:enable-flow-sources>
+	</munit:test>
+	<munit:test name="postMoveSnakeGoesForFarFoodIfLessThan3FoodExistsUp" doc:id="6bd94fa3-c310-4bf0-a5b2-676fc2564123" >
+		<munit:enable-flow-sources >
+			<munit:enable-flow-source value="battlesnake-api-main" />
+			<munit:enable-flow-source value="post:\move:application\json:battlesnake-api-config" />
+		</munit:enable-flow-sources>
+		<munit:execution >
+			<ee:transform doc:name="8x8 board 1 snake 2 food" doc:id="18ed9c02-6129-4ac1-be4d-c005d237d5cc" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+  game: {
+    id: "game-00fe20da-94ad-11ea-bb37",
+    ruleset: {
+      name: "standard",
+      version: "v.1.2.3",
+      settings: {
+        foodSpawnChance: 25,
+        minimumFood: 1,
+        hazardDamagePerTurn: 14,
+        royale: {
+          shrinkEveryNTurns: 5
+        },
+        squad: {
+          allowBodyCollisions: true,
+          sharedElimination: true,
+          sharedHealth: true,
+          sharedLength: true
+        }
+      }
+    },
+    map: "standard",
+    source: "league",
+    timeout: 500
+  },
+  turn: 14,
+  board: {
+    height: 8,
+    width: 8,
+    food: [
+    	{
+		  x: 2,
+          y: 7
+    	},
+    	{
+    	  x: 7,
+          y: 7
+    	},
+    ],
+    hazards: [],
+    snakes: [
+      {
+        id: "snake-508e96ac-94ad-11ea-bb37",
+        name: "My Snake",
+        health: 54,
+        body: [
+          {
+            x: 2,
+            y: 0
+          }, 
+          {
+            x: 1,
+            y: 0
+          }
+        ],
+        latency: "111",
+        head: {
+          x: 2,
+          y: 0
+        },
+        length: 2,
+        shout: "why are we shouting??",
+        squad: "",
+        customizations: {
+          color: "#FF0000",
+          head: "pixel",
+          tail: "pixel"
+        }
+      },
+    ]
+  },
+  you: {
+    id: "snake-508e96ac-94ad-11ea-bb37",
+    name: "My Snake",
+    health: 54,
+    body: [
+      {
+        x: 2,
+        y: 0
+      }, 
+      {
+        x: 1,
+        y: 0
+      }
+    ],
+    latency: "111",
+    head: {
+      x: 2,
+      y: 0
+    },
+    length: 2,
+    shout: "why are we shouting??",
+    squad: "",
+    customizations: {
+      color: "#FF0000",
+      head: "pixel",
+      tail: "pixel"
+    }
+  }
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<http:request method="POST" doc:name="POST /api/move" doc:id="db0a6292-5bd7-49fa-b4d7-fba4256a075f" config-ref="HTTP_Request_configuration1" path="/api/move" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name='Assert that move is "up"' doc:id="61d621e6-8ea8-4696-b8ea-7988357cf141" expression="#[payload.move]" is='#[MunitTools::equalTo("up")]' />
+		</munit:validation>
+	</munit:test>
+	<munit:test name="postMoveSnakeGoesForFarFoodIfLessThan3FoodExistsDown" doc:id="15336e90-6d26-47dd-b105-de0fe514cbe8" >
+		<munit:enable-flow-sources >
+			
+			<munit:enable-flow-source value="post:\move:application\json:battlesnake-api-config" />
+			<munit:enable-flow-source value="battlesnake-api-main" />
+		</munit:enable-flow-sources>
+	</munit:test>
+	<munit:test name="postMoveSnakeGoesForFarFoodIfLessThan3FoodExistsLeft" doc:id="381238aa-48f3-4587-ab86-08d1edb8e331" >
+		<munit:enable-flow-sources >
+			
+			<munit:enable-flow-source value="post:\move:application\json:battlesnake-api-config" />
+			<munit:enable-flow-source value="battlesnake-api-main" />
+		</munit:enable-flow-sources>
+	</munit:test>
+	<munit:test name="postMoveSnakeGoesForFarFoodIfLessThan3FoodExistsRight" doc:id="2e924585-38d7-42c1-ba28-edfaa6412cb7" >
 		<munit:enable-flow-sources >
 			
 			<munit:enable-flow-source value="post:\move:application\json:battlesnake-api-config" />
