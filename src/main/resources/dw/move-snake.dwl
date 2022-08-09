@@ -38,12 +38,19 @@ var preferredMoves =
             "up": false,
             "down": false
         }
-    else
-        {
+    else if (sizeOf(food) < 3)
+    	{
             "left": (head.x - closestFood.x > 0),
             "right": (head.x - closestFood.x < 0),
             "up": (head.y - closestFood.y < 0),
             "down": (head.y - closestFood.y > 0)
+        }
+    else
+        {
+            "left": (head.x - closestFood.x > 0 and head.x - closestFood.x < 5),
+            "right": (head.x - closestFood.x < 0 and head.x - closestFood.x > -5),
+            "up": (head.y - closestFood.y < 0 and head.y - closestFood.y > -5),
+            "down": (head.y - closestFood.y > 0 and head.y - closestFood.y < 5)
         }
 
 fun calcLastMove(pt1,pt2) =
