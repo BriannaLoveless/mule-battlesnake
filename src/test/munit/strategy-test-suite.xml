@@ -3959,6 +3959,119 @@ output application/json
 			<munit:enable-flow-source value="post:\move:application\json:battlesnake-api-config" />
 			<munit:enable-flow-source value="battlesnake-api-main" />
 		</munit:enable-flow-sources>
+		<munit:execution >
+			<ee:transform doc:name="8x8 board 1 snake 2 food" doc:id="d20cbcae-3233-4582-997c-15a9e91f39e4" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+  game: {
+    id: "game-00fe20da-94ad-11ea-bb37",
+    ruleset: {
+      name: "standard",
+      version: "v.1.2.3",
+      settings: {
+        foodSpawnChance: 25,
+        minimumFood: 1,
+        hazardDamagePerTurn: 14,
+        royale: {
+          shrinkEveryNTurns: 5
+        },
+        squad: {
+          allowBodyCollisions: true,
+          sharedElimination: true,
+          sharedHealth: true,
+          sharedLength: true
+        }
+      }
+    },
+    map: "standard",
+    source: "league",
+    timeout: 500
+  },
+  turn: 14,
+  board: {
+    height: 8,
+    width: 8,
+    food: [
+    	{
+		  x: 1,
+          y: 0
+    	},
+    	{
+    	  x: 7,
+          y: 0
+    	},
+    ],
+    hazards: [],
+    snakes: [
+      {
+        id: "snake-508e96ac-94ad-11ea-bb37",
+        name: "My Snake",
+        health: 54,
+        body: [
+          {
+            x: 1,
+            y: 7
+          }, 
+          {
+            x: 0,
+            y: 7
+          }
+        ],
+        latency: "111",
+        head: {
+          x: 1,
+          y: 7
+        },
+        length: 2,
+        shout: "why are we shouting??",
+        squad: "",
+        customizations: {
+          color: "#FF0000",
+          head: "pixel",
+          tail: "pixel"
+        }
+      },
+    ]
+  },
+  you: {
+    id: "snake-508e96ac-94ad-11ea-bb37",
+    name: "My Snake",
+    health: 54,
+    body: [
+      {
+        x: 1,
+        y: 7
+      }, 
+      {
+        x: 0,
+        y: 0
+      }
+    ],
+    latency: "111",
+    head: {
+      x: 1,
+      y: 7
+    },
+    length: 2,
+    shout: "why are we shouting??",
+    squad: "",
+    customizations: {
+      color: "#FF0000",
+      head: "pixel",
+      tail: "pixel"
+    }
+  }
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<http:request method="POST" doc:name="POST /api/move" doc:id="529f4c51-1ab2-4265-914f-a4237d7f8010" config-ref="HTTP_Request_configuration1" path="/api/move" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name='Assert that move is "down"' doc:id="2eac782e-c107-4b80-a5e6-839c73a7dd96" expression="#[payload.move]" is='#[MunitTools::equalTo("down")]' />
+		</munit:validation>
 	</munit:test>
 	<munit:test name="postMoveSnakeGoesForFarFoodIfLessThan3FoodExistsLeft" doc:id="381238aa-48f3-4587-ab86-08d1edb8e331" >
 		<munit:enable-flow-sources >
@@ -3966,6 +4079,119 @@ output application/json
 			<munit:enable-flow-source value="post:\move:application\json:battlesnake-api-config" />
 			<munit:enable-flow-source value="battlesnake-api-main" />
 		</munit:enable-flow-sources>
+		<munit:execution >
+			<ee:transform doc:name="8x8 board 1 snake 2 food" doc:id="5f777d83-7ada-4f9f-9b82-c415e6b7cec9" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+  game: {
+    id: "game-00fe20da-94ad-11ea-bb37",
+    ruleset: {
+      name: "standard",
+      version: "v.1.2.3",
+      settings: {
+        foodSpawnChance: 25,
+        minimumFood: 1,
+        hazardDamagePerTurn: 14,
+        royale: {
+          shrinkEveryNTurns: 5
+        },
+        squad: {
+          allowBodyCollisions: true,
+          sharedElimination: true,
+          sharedHealth: true,
+          sharedLength: true
+        }
+      }
+    },
+    map: "standard",
+    source: "league",
+    timeout: 500
+  },
+  turn: 14,
+  board: {
+    height: 8,
+    width: 8,
+    food: [
+    	{
+		  x: 0,
+          y: 1
+    	},
+    	{
+    	  x: 0,
+          y: 7
+    	},
+    ],
+    hazards: [],
+    snakes: [
+      {
+        id: "snake-508e96ac-94ad-11ea-bb37",
+        name: "My Snake",
+        health: 54,
+        body: [
+          {
+            x: 7,
+            y: 1
+          }, 
+          {
+            x: 7,
+            y: 0
+          }
+        ],
+        latency: "111",
+        head: {
+          x: 7,
+          y: 1
+        },
+        length: 2,
+        shout: "why are we shouting??",
+        squad: "",
+        customizations: {
+          color: "#FF0000",
+          head: "pixel",
+          tail: "pixel"
+        }
+      },
+    ]
+  },
+  you: {
+    id: "snake-508e96ac-94ad-11ea-bb37",
+    name: "My Snake",
+    health: 54,
+    body: [
+      {
+        x: 7,
+        y: 1
+      }, 
+      {
+        x: 7,
+        y: 0
+      }
+    ],
+    latency: "111",
+    head: {
+      x: 7,
+      y: 1
+    },
+    length: 2,
+    shout: "why are we shouting??",
+    squad: "",
+    customizations: {
+      color: "#FF0000",
+      head: "pixel",
+      tail: "pixel"
+    }
+  }
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<http:request method="POST" doc:name="POST /api/move" doc:id="e2f5820a-3de5-4a9f-98d2-5e23e3571399" config-ref="HTTP_Request_configuration1" path="/api/move" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name='Assert that move is "left"' doc:id="f3d43f13-6fed-4590-a9a8-08f14a392723" expression="#[payload.move]" is='#[MunitTools::equalTo("left")]' />
+		</munit:validation>
 	</munit:test>
 	<munit:test name="postMoveSnakeGoesForFarFoodIfLessThan3FoodExistsRight" doc:id="2e924585-38d7-42c1-ba28-edfaa6412cb7" >
 		<munit:enable-flow-sources >
@@ -3973,6 +4199,119 @@ output application/json
 			<munit:enable-flow-source value="post:\move:application\json:battlesnake-api-config" />
 			<munit:enable-flow-source value="battlesnake-api-main" />
 		</munit:enable-flow-sources>
+		<munit:execution >
+			<ee:transform doc:name="8x8 board 1 snake 2 food" doc:id="21f39a8f-de73-45c0-a1ed-3af12cb071a5" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+  game: {
+    id: "game-00fe20da-94ad-11ea-bb37",
+    ruleset: {
+      name: "standard",
+      version: "v.1.2.3",
+      settings: {
+        foodSpawnChance: 25,
+        minimumFood: 1,
+        hazardDamagePerTurn: 14,
+        royale: {
+          shrinkEveryNTurns: 5
+        },
+        squad: {
+          allowBodyCollisions: true,
+          sharedElimination: true,
+          sharedHealth: true,
+          sharedLength: true
+        }
+      }
+    },
+    map: "standard",
+    source: "league",
+    timeout: 500
+  },
+  turn: 14,
+  board: {
+    height: 8,
+    width: 8,
+    food: [
+    	{
+		  x: 7,
+          y: 1
+    	},
+    	{
+    	  x: 7,
+          y: 7
+    	},
+    ],
+    hazards: [],
+    snakes: [
+      {
+        id: "snake-508e96ac-94ad-11ea-bb37",
+        name: "My Snake",
+        health: 54,
+        body: [
+          {
+            x: 0,
+            y: 1
+          }, 
+          {
+            x: 0,
+            y: 0
+          }
+        ],
+        latency: "111",
+        head: {
+          x: 0,
+          y: 1
+        },
+        length: 2,
+        shout: "why are we shouting??",
+        squad: "",
+        customizations: {
+          color: "#FF0000",
+          head: "pixel",
+          tail: "pixel"
+        }
+      },
+    ]
+  },
+  you: {
+    id: "snake-508e96ac-94ad-11ea-bb37",
+    name: "My Snake",
+    health: 54,
+    body: [
+      {
+        x: 0,
+        y: 1
+      }, 
+      {
+        x: 0,
+        y: 0
+      }
+    ],
+    latency: "111",
+    head: {
+      x: 0,
+      y: 1
+    },
+    length: 2,
+    shout: "why are we shouting??",
+    squad: "",
+    customizations: {
+      color: "#FF0000",
+      head: "pixel",
+      tail: "pixel"
+    }
+  }
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<http:request method="POST" doc:name="POST /api/move" doc:id="b968c80e-745a-4dbb-84b5-af9fc921baab" config-ref="HTTP_Request_configuration1" path="/api/move" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name='Assert that move is "right"' doc:id="6874a865-e88e-4976-ab6f-63518afdc847" expression="#[payload.move]" is='#[MunitTools::equalTo("right")]' />
+		</munit:validation>
 	</munit:test>
 
 </mule>
