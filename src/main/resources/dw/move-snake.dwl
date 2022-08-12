@@ -65,6 +65,13 @@ fun calcLastMove(pt1,pt2) =
 		
 var lastMove = calcLastMove(head,neck)
 
+var BadSafeMoves = {
+    "left": not (snakePartHere(head.x - 2, head.y) 
+            and (lastMove == "up" or "down")),
+    "right": not (snakePartHere(head.x + 2, head.y) 
+             and (lastMove == "up" or "down")) 
+}
+
 var safeMoves = moves filter (move) -> checkedPositions[move]
 var safePreferred = safeMoves filter (move) -> preferredMoves[move]
 
